@@ -3,10 +3,10 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "set NEXT_PRIVATE_LOCAL_WEBPACK=true && next dev",
-        "build": "set NEXT_PRIVATE_LOCAL_WEBPACK=true && next build",
-        "start": "set NEXT_PRIVATE_LOCAL_WEBPACK=true && next start",
-        "lint": "set NEXT_PRIVATE_LOCAL_WEBPACK=true && next lint"
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
     },
     "dependencies": {
         "@module-federation/nextjs-mf": "^8.6.3",
