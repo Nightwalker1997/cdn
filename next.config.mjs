@@ -6,43 +6,44 @@ const nextConfig = {
     webpack(config, options) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { isServer } = options;
-        config.plugins.push(
-            new NextFederationPlugin({
-                name: "rsc",
-                // remotes: {
-                //     // this will contain remote route
-                // },
-                filename: "static/chunks/remoteEntry.js",
-                exposes: {
-                    "./template001": "./templates/testpage/tsp.tsx",
-                    "./input001": "./components/input/input1.tsx",
-                    "./button001": "./components/buttons/btn.tsx",
-                    "./meta": "./meta/head1.tsx",
-                },
-                extraOptions: {
-                    debug: false, // `false` by default
-                    exposePages: false, // `false` by default
-                },
-                shared: {
-                    react: {
-                        singleton: true, // this will make sure it will be loaded
-                        // only once during runtime
-                        eager: true,
-                        requiredVersion: false,
+        if (!isServer) {
+            config.plugins.push(
+                new NextFederationPlugin({
+                    name: "rsc",
+                    // remotes: {
+                    //     // this will contain remote route
+                    // },
+                    filename: "static/chunks/remoteEntry.js",
+                    exposes: {
+                        "./template001": "./templates/testpage/tsp.tsx",
+                        "./input001": "./components/input/input1.tsx",
+                        "./button001": "./components/buttons/btn.tsx",
+                        "./meta": "./meta/head1.tsx",
                     },
-                    "react-dom": {
-                        singleton: true,
-                        eager: true,
-                        requiredVersion: false,
+                    extraOptions: {
+                        debug: false, // `false` by default
+                        exposePages: false, // `false` by default
                     },
-                    // files or dependencies we want to share
-                },
-                initOptions: {
-                    shareStrategy: "loaded-first", // Set the share strategy here
-                },
-            })
-        );
-
+                    shared: {
+                        react: {
+                            singleton: true, // this will make sure it will be loaded
+                            // only once during runtime
+                            eager: true,
+                            requiredVersion: false,
+                        },
+                        "react-dom": {
+                            singleton: true,
+                            eager: true,
+                            requiredVersion: false,
+                        },
+                        // files or dependencies we want to share
+                    },
+                    initOptions: {
+                        shareStrategy: "loaded-first", // Set the share strategy here
+                    },
+                })
+            );
+        }
         return config;
     },
 };
